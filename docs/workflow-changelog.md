@@ -2,6 +2,33 @@
 
 ---
 
+## 2026-03-22: CSS framework changed from Tailwind to Plain CSS
+
+**Problem:** Tailwind CSS is dying — the framework and its ecosystem are in decline. Continuing to use it in new projects introduces long-term maintenance risk.
+
+**Cause:** Strategic project decision by the user.
+
+**Fix:** Removed all Tailwind CSS references from Phase 4 implementation docs. Design token values (colors, spacing) are preserved; delivery mechanism changes from Tailwind utility classes to CSS custom properties. CSS architecture (naming conventions, file structure) deferred to a Stage 4-1 revisit session.
+
+**Files:**
+- `docs/tech-stack.md` — updated CSS framework row to "Plain CSS"
+- `docs/phase-3-design-decisions.md` — added [REVISED] block; updated Phase 4 implementation rule
+- `consolidation-artifacts/ui-style-guide.md` — replaced Tailwind theme config section with CSS custom property token table; updated Phase 4 implementation table
+
+---
+
+## 2026-03-20: Portable workflow root discovery via `.workflow-root` marker
+
+**Problem:** SessionEnd (and SessionStart) hooks failed when Claude's CWD moved into `prototype-code/`, which has its own `.git` directory. `git rev-parse --show-toplevel` returned `prototype-code/` instead of the project root, causing the scripts to not be found.
+
+**Cause:** Nested git repo in `prototype-code/`. `git rev-parse --show-toplevel` is CWD-sensitive and resolves to the nearest `.git` ancestor, not the workflow root.
+
+**Fix:** Created a `.workflow-root` sentinel file at the project root (tracked in git). Updated both hooks in `.claude/settings.json` to walk up from `$PWD` until `.workflow-root` is found, then call the scripts relative to that directory.
+
+**Files:** `.workflow-root` (new), `.claude/settings.json`
+
+---
+
 ## 2026-03-20: New stage 4-2b — Design-First Implementation
 
 **Problem:** Gap between Stage 4-2 (AI writes, user reviews) and Stage 4-3 (user writes, AI guides). User wanted a mode where they own the design but don't have to type the implementation.

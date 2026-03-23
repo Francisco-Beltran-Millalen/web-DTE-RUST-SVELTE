@@ -1,0 +1,471 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ── Base Reset ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg-page);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--primary);
+}
+
+/* ── Light Mode (default) ── */
+:root {
+  /* Backgrounds */
+  --bg-page:            #ece9e4;
+  --bg-surface:         #f9f7f4;
+
+  /* Borders */
+  --border:             #cfc9c2;
+  --border-subtle:      #ddd9d3;
+
+  /* Text */
+  --text:               #3d3530;
+  --text-secondary:     #7a6f66;
+  --text-muted:         #9c9187;
+  --text-faint:         #b5aba2;
+
+  /* Brand / Primary */
+  --primary:            #16a34a;
+  --primary-hover:      #15803d;
+  --primary-subtle:     #f0fdf4;
+  --primary-text:       #15803d;
+  --primary-500:        #22c55e;
+  --primary-ring:       rgba(34, 197, 94, 0.25);
+
+  /* Derived tokens — color-mix re-evaluates when base token changes in dark mode */
+  --bg-input:           color-mix(in srgb, var(--bg-page) 60%, transparent);
+  --bg-hover:           color-mix(in srgb, var(--bg-page) 40%, transparent);
+  --bg-panel:           color-mix(in srgb, var(--bg-page) 60%, transparent);
+  --bg-tab-active:      color-mix(in srgb, var(--bg-page) 50%, transparent);
+  --bg-tab-hover:       color-mix(in srgb, var(--bg-page) 30%, transparent);
+  --text-ink-dark:      color-mix(in srgb, var(--text) 80%, transparent);
+
+  /* Status: DTE estados */
+  --status-pendiente-bg:        #fef3c7;
+  --status-pendiente-text:      #92400e;
+  --status-manual-em-bg:        #ffedd5;
+  --status-manual-em-text:      #9a3412;
+  --status-fallido-bg:          #fee2e2;
+  --status-fallido-text:        #991b1b;
+  --status-emitido-bg:          #dcfce7;
+  --status-emitido-text:        #166534;
+  --status-emitido-manual-bg:   #d1fae5;
+  --status-emitido-manual-text: #065f46;
+
+  /* Status: PDF */
+  --status-pdf-sent-bg:         #eff6ff;
+  --status-pdf-sent-text:       #2563eb;
+  --status-pdf-pending-bg:      #fffbeb;
+  --status-pdf-pending-text:    #b45309;
+
+  /* Semantic extras */
+  --color-red:          #ef4444;
+  --color-orange:       #ea580c;
+  --color-amber-text:   #78350f;
+  --color-amber-bg:     rgba(245, 158, 11, 0.08);
+  --color-ml:           #f59e0b;
+
+  /* Stats */
+  --stat-savings:       rgba(29, 78, 216, 0.5);
+  --stat-revenue:       rgba(22, 101, 52, 0.5);
+
+  /* Button foreground — text color on colored button backgrounds */
+  --primary-fg:         white;
+  --orange-fg:          white;
+
+  /* SII document accent — mimics official SII red border */
+  --sii-red:            #dc2626;
+  --sii-red-text:       #b91c1c;
+}
+
+/* ── Dark Mode — Everforest Medium Dark ── */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-page:            #2d353b;  /* bg0 */
+  --bg-surface:         #343f44;  /* bg1 */
+  --border:             #475258;  /* bg3 */
+  --border-subtle:      #3d484d;  /* bg2 */
+  --text:               #d3c6aa;  /* fg */
+  --text-secondary:     #9da9a0;  /* grey2 */
+  --text-muted:         #859289;  /* grey1 */
+  --text-faint:         #7a8478;  /* grey0 */
+  --primary:            #a7c080;  /* green */
+  --primary-hover:      #83c092;  /* aqua */
+  --primary-subtle:     #232a2e;  /* bg_dim */
+  --primary-text:       #a7c080;
+  --primary-500:        #83c092;
+  --primary-ring:       rgba(167, 192, 128, 0.25);
+
+  /* Status: DTE estados */
+  --status-pendiente-bg:        rgba(219, 188, 127, 0.15);
+  --status-pendiente-text:      #dbbc7f;
+  --status-manual-em-bg:        rgba(230, 152, 117, 0.15);
+  --status-manual-em-text:      #e69875;
+  --status-fallido-bg:          rgba(230, 126, 128, 0.15);
+  --status-fallido-text:        #e67e80;
+  --status-emitido-bg:          rgba(167, 192, 128, 0.15);
+  --status-emitido-text:        #a7c080;
+  --status-emitido-manual-bg:   rgba(131, 192, 146, 0.15);
+  --status-emitido-manual-text: #83c092;
+
+  /* Status: PDF */
+  --status-pdf-sent-bg:         rgba(127, 187, 179, 0.15);
+  --status-pdf-sent-text:       #7fbbb3;
+  --status-pdf-pending-bg:      rgba(219, 188, 127, 0.15);
+  --status-pdf-pending-text:    #dbbc7f;
+
+  /* Semantic extras */
+  --color-red:          #e67e80;
+  --color-orange:       #e69875;
+  --color-amber-text:   #dbbc7f;
+  --color-amber-bg:     rgba(219, 188, 127, 0.08);
+  --color-ml:           #dbbc7f;
+
+  /* Stats */
+  --stat-savings:       rgba(127, 187, 179, 0.6);
+  --stat-revenue:       rgba(167, 192, 128, 0.6);
+
+  /* Button foreground — dark bg reads better on muted Everforest accents */
+  --primary-fg:         #232a2e;
+  --orange-fg:          #232a2e;
+
+  /* SII document accent — softer Everforest red instead of harsh web-red */
+  --sii-red:            #e67e80;
+  --sii-red-text:       #e67e80;
+}
+
+/* System preference — applies when no explicit data-theme is set */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --bg-page:            #2d353b;
+    --bg-surface:         #343f44;
+    --border:             #475258;
+    --border-subtle:      #3d484d;
+    --text:               #d3c6aa;
+    --text-secondary:     #9da9a0;
+    --text-muted:         #859289;
+    --text-faint:         #7a8478;
+    --primary:            #a7c080;
+    --primary-hover:      #83c092;
+    --primary-subtle:     #232a2e;
+    --primary-text:       #a7c080;
+    --primary-500:        #83c092;
+    --primary-ring:       rgba(167, 192, 128, 0.25);
+    --status-pendiente-bg:        rgba(219, 188, 127, 0.15);
+    --status-pendiente-text:      #dbbc7f;
+    --status-manual-em-bg:        rgba(230, 152, 117, 0.15);
+    --status-manual-em-text:      #e69875;
+    --status-fallido-bg:          rgba(230, 126, 128, 0.15);
+    --status-fallido-text:        #e67e80;
+    --status-emitido-bg:          rgba(167, 192, 128, 0.15);
+    --status-emitido-text:        #a7c080;
+    --status-emitido-manual-bg:   rgba(131, 192, 146, 0.15);
+    --status-emitido-manual-text: #83c092;
+    --status-pdf-sent-bg:         rgba(127, 187, 179, 0.15);
+    --status-pdf-sent-text:       #7fbbb3;
+    --status-pdf-pending-bg:      rgba(219, 188, 127, 0.15);
+    --status-pdf-pending-text:    #dbbc7f;
+    --color-red:          #e67e80;
+    --color-orange:       #e69875;
+    --color-amber-text:   #dbbc7f;
+    --color-amber-bg:     rgba(219, 188, 127, 0.08);
+    --color-ml:           #dbbc7f;
+    --stat-savings:       rgba(127, 187, 179, 0.6);
+    --stat-revenue:       rgba(167, 192, 128, 0.6);
+    --primary-fg:         #232a2e;
+    --orange-fg:          #232a2e;
+    --sii-red:            #e67e80;
+    --sii-red-text:       #e67e80;
+  }
+}
+
+/* ── Global Button Styles ── */
+/* Base shared properties */
+.btn-primary,
+.btn-secondary,
+.btn-dark,
+.btn-orange {
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, color 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-primary  { background: var(--primary); color: var(--primary-fg); }
+.btn-primary:hover  { background: var(--primary-hover); }
+
+.btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text-secondary); }
+.btn-secondary:hover { background: var(--bg-page); color: var(--text); }
+
+.btn-dark { background: var(--text-ink-dark); color: var(--bg-surface); }
+.btn-dark:hover { background: var(--text); }
+
+.btn-orange { background: var(--color-orange); color: var(--orange-fg); }
+.btn-orange:hover { background: color-mix(in srgb, var(--color-orange) 85%, black); }
+
+.btn-danger { background: var(--color-red); color: white; }
+.btn-danger:hover { background: color-mix(in srgb, var(--color-red) 85%, black); }
+
+.btn-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  color: var(--primary-text);
+}
+.btn-link:hover { color: var(--primary-hover); }
+
+/* Pill variants */
+.btn-pill {
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn-pill--primary   { background: var(--primary);       color: var(--primary-fg); }
+.btn-pill--primary:hover  { background: var(--primary-hover); }
+.btn-pill--secondary { background: var(--bg-hover);      color: var(--text-secondary); }
+.btn-pill--secondary:hover { background: var(--bg-page); color: var(--text); }
+.btn-pill--dark      { background: var(--text-ink-dark); color: var(--bg-surface); }
+.btn-pill--dark:hover { background: var(--text); }
+.btn-pill--orange    { background: var(--color-orange);  color: var(--orange-fg); }
+.btn-pill--orange:hover { background: color-mix(in srgb, var(--color-orange) 85%, black); }
+
+/* Full-width override — auth submit buttons and similar */
+.btn-full { width: 100%; padding: 10px 16px; }
+
+/* Disabled state — applies in auth forms and anywhere a submit button can be loading */
+.btn-primary:disabled {
+  background: var(--bg-page);
+  color: var(--text-faint);
+  cursor: not-allowed;
+}
+
+/* ── Forms ── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.form-input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: var(--text);
+  font-family: inherit;
+}
+
+.form-input::placeholder { color: var(--text-faint); }
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px var(--primary-ring);
+}
+
+.form-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: color-mix(in srgb, var(--color-red) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-red) 30%, transparent);
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: color-mix(in srgb, var(--color-red) 85%, var(--text));
+}
+
+.error-icon {
+  flex-shrink: 0;
+  color: var(--color-red);
+}
+
+/* ── Card ── */
+.card {
+  background: var(--bg-surface);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card--danger { border-color: color-mix(in srgb, var(--color-red) 40%, transparent); }
+
+.card-body { padding: 20px; }
+
+.card-footer {
+  border-top: 1px solid var(--border-subtle);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-footer--center {
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-footer--danger { border-color: color-mix(in srgb, var(--color-red) 30%, transparent); }
+
+/* ── Auth card ── */
+.auth-card {
+  width: 100%;
+  max-width: 384px;
+  background: var(--bg-surface);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.auth-card__title {
+  margin: 0 0 20px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.auth-card__footer {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.auth-card__footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.footer-text { color: var(--text-muted); }
+
+/* ── Links ── */
+.link-primary {
+  color: var(--primary-text);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.link-primary:hover { color: var(--primary-hover); }
+
+.link-subtle {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.link-subtle:hover { color: var(--text-secondary); }
+
+/* ── Typography helpers ── */
+.section-heading {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+/* ── Icon helpers ── */
+.icon-inline { display: inline; vertical-align: middle; }
+.icon-faint  { color: var(--text-faint); }
+.icon-ml     { color: var(--color-ml); }
+
+/* ── Typography helpers ── */
+.font-mono   { font-family: ui-monospace, monospace; font-size: 12px; }
+.font-medium { font-weight: 500; }
+.font-bold   { font-weight: 700; }
+.font-small  { font-size: 12px; }
+.text-faint  { color: var(--text-faint); }
+.text-muted  { color: var(--text-muted); }
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+
+/* ── Badges ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badge[data-estado="pendiente"]      { background: var(--status-pendiente-bg);      color: var(--status-pendiente-text); }
+.badge[data-estado="manual"]         { background: var(--status-manual-em-bg);       color: var(--status-manual-em-text); }
+.badge[data-estado="fallido"]        { background: var(--status-fallido-bg);         color: var(--status-fallido-text); }
+.badge[data-estado="emitido"]        { background: var(--status-emitido-bg);         color: var(--status-emitido-text); }
+.badge[data-estado="emitido-manual"] { background: var(--status-emitido-manual-bg);  color: var(--status-emitido-manual-text); }
+
+.badge--pdf {
+  font-size: 10px;
+  margin-left: 4px;
+}
+.badge--pdf[data-pdf="enviado"]   { background: var(--status-pdf-sent-bg);    color: var(--status-pdf-sent-text); }
+.badge--pdf[data-pdf="pendiente"] { background: var(--status-pdf-pending-bg); color: var(--status-pdf-pending-text); }
+
+/* ── Page header (shared across app pages) ── */
+.page-hdr    { margin-bottom: 24px; }
+.page-title  { margin: 0; font-size: 18px; font-weight: 700; color: var(--text); }
+.page-subtitle { margin: 4px 0 0; font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+
+/* ── Back navigation link ── */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-bottom: 16px;
+  transition: color 0.15s;
+}
+.back-link:hover { color: var(--text-secondary); }

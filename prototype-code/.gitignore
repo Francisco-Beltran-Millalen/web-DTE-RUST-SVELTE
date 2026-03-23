@@ -1,0 +1,9 @@
+# Rust / Backend
+backend/target/
+backend/.env
+backend/*.db
+backend/server.log
+
+# OS
+.DS_Store
+Thumbs.db
